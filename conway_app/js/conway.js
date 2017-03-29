@@ -8,9 +8,13 @@ function cellClicked(e){
   if(count < 2 || count > 3){
     $src.addClass('dead');
   }
-  else if(count===3 && $src.hasClass('dead')){
+  else if(count===3 && $src.hasClass('dead')){//might never happen
     $src.addClass('clicked');
   }
+}
+
+function deadOrAlive(cell){
+  
 }
 
 function getCell(x, y){
