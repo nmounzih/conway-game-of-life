@@ -5,6 +5,12 @@ function cellClicked(e){
   let neighbors = getNeighbors(e.target);
   let count = countLiveNeighbors(neighbors);
   console.log(count);
+  if(count < 2 || count > 3){
+    $src.addClass('dead');
+  }
+  else if(count===3 && $src.hasClass('dead')){
+    $src.addClass('clicked');
+  }
 }
 
 function getCell(x, y){
@@ -40,6 +46,20 @@ function countLiveNeighbors(neighbors){
   return count;
 }
 
+// function killCell(e, neighbors){
+//   let count = 0;
+//   for(let i = 0; i < neighbors.length; i++){
+//     if(neighbors[i].hasClass('clicked')){
+//       count ++;
+//     if(count > 0){
+//       e.target.addClass('dead');
+//     }
+//     }
+//     }
+//     return e.target
+//   }
+
+
 
 function buildGameBoard(x, y){
   let $board = $('<table>');
@@ -55,6 +75,7 @@ function buildGameBoard(x, y){
   }
   $('#gameBoard').append($board);
   console.log($board);
-}
+  }
+
 
 buildGameBoard(10, 10)
