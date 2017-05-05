@@ -8,3 +8,5 @@ This is an application that plays Conway's Game of Life. This is a zero person g
 - A DEAD cell with 3 LIVE neighbors is born again.
 
 The game goes on until it is not possible to make any more moves (or unless it's in an infinite loop).
+
+*A work in progress
