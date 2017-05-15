@@ -70,9 +70,9 @@ function updateMirrorCells(){
   for(var i = 0; i < x; i++){
     for(var j = 0; j < y; j ++){
       let $cell = getCell(i, j);
-      let neighbors = getNeighbors($cell);
-      let count = countLiveNeighbors(neighbors);
-      if($cell.hasClas('clicked')){
+      // let neighbors = getNeighbors($cell);
+      let count = countLiveNeighbors(i, j);
+      if($cell.hasClass('clicked')){
         if(count <2 || count > 3){
           $cell.addClass('dead');
         }
@@ -91,14 +91,7 @@ function updateCells(){
   for(var j = 0; j < y; j++){
     for(var i = 0; i < x; i++){
       let $cell = getCell(i, j);
-      if($cell.hasClass('dead')){
-        $cell.removeClass('dead');
-        $cell.addClass('clicked');
-      } if($cell.hasClass('clicked')){
-        $cell.removeClass('clicked');
-        $cell.addClass('dead');
-
-      }
+    
     }
 
   }
