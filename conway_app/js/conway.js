@@ -75,7 +75,7 @@ function updateCells(){
         $cell.removeClass('dead');
       } if($cell.hasClass('dead')){
         $cell.addClass('clicked');
-        $cell.removeClass('deadx');
+        $cell.removeClass('dead');
       }
     }
 
