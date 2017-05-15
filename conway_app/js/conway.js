@@ -66,16 +66,38 @@ function buildGameBoard(x, y){
   console.log($board);
   }
 
+function updateMirrorCells(){
+  for(var i = 0; i < x; i++){
+    for(var j = 0; j < y; j ++){
+      let $cell = getCell(i, j);
+      let neighbors = getNeighbors($cell);
+      let count = countLiveNeighbors(neighbors);
+      if($cell.hasClas('clicked')){
+        if(count <2 || count > 3){
+          $cell.addClass('dead');
+        }
+        else{
+          if(count === 3){
+            $cell.addClass('clicked');
+          }
+        }
+      }
+    }
+  }
+}
+
 function updateCells(){
+  updateMirrorCells(x, y);
   for(var j = 0; j < y; j++){
     for(var i = 0; i < x; i++){
       let $cell = getCell(i, j);
       if($cell.hasClass('dead')){
-        $cell.removeClass('clicked');
         $cell.removeClass('dead');
-      } if($cell.hasClass('dead')){
         $cell.addClass('clicked');
-        $cell.removeClass('dead');
+      } if($cell.hasClass('clicked')){
+        $cell.removeClass('clicked');
+        $cell.addClass('dead');
+
       }
     }
 
