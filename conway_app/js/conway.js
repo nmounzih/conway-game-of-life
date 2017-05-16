@@ -4,17 +4,17 @@ $('#go').click(start);
 
 function cellClicked(e){
   var $src = $(e.target);
-  $src.addClass('clicked');
+  $src.toggleClass('clicked');
   console.log($src);
-  let neighbors = getNeighbors(e.target);
-  let count = countLiveNeighbors(neighbors);
-  console.log(count);
-  if(count < 2 || count > 3){
-    $src.addClass('dead');
-  }
-  else if(count===3 && $src.hasClass('dead')){
-    $src.addClass('clicked');
-  }
+  // let neighbors = getNeighbors(e.target);
+  // let count = countLiveNeighbors(neighbors);
+  // console.log(count);
+  // if(count < 2 || count > 3){
+  //   $src.addClass('dead');
+  // }
+  // else if(count===3 && $src.hasClass('dead')){
+  //   $src.addClass('clicked');
+  // }
 }
 
 function getCell(x, y){
@@ -74,11 +74,11 @@ function updateMirrorCells(){
       let count = countLiveNeighbors(i, j);
       if($cell.hasClass('clicked')){
         if(count <2 || count > 3){
-          $cell.addClass('dead');
+          $cell.toggleClass('aboutToDie');
         }
         else{
           if(count === 3){
-            $cell.addClass('clicked');
+            $cell.toggleClass('reBorn');
           }
         }
       }
@@ -91,7 +91,11 @@ function updateCells(){
   for(var j = 0; j < y; j++){
     for(var i = 0; i < x; i++){
       let $cell = getCell(i, j);
-    
+      if($cell.hasClass('aboutToDie')){
+        $cell.toggleClass('dead');
+      } else if($cell.hasClass('reBorn')){
+        $cell.toggleClass('clicked');
+      }
     }
 
   }

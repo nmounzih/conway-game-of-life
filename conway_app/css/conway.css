@@ -13,3 +13,7 @@ tr, td{
 .clicked{
   background-color: LightSteelBlue;
 }
+
+.dead{
+  background-color: white;
+}
