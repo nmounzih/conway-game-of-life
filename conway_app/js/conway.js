@@ -1,29 +1,20 @@
-let x = 20;
-let y = 20;
+let x = 10;
+let y = 10;
 $('#go').click(start);
 
 function cellClicked(e){
   var $src = $(e.target);
   $src.toggleClass('clicked');
   console.log($src);
-  // let neighbors = getNeighbors(e.target);
-  // let count = countLiveNeighbors(neighbors);
-  // console.log(count);
-  // if(count < 2 || count > 3){
-  //   $src.addClass('dead');
-  // }
-  // else if(count===3 && $src.hasClass('dead')){
-  //   $src.addClass('clicked');
-  // }
 }
 
 function getCell(x, y){
   return $('#cell_' + x + '_' + y);
 }
 
-function getNeighbors(currentCell){
-  let y = currentCell.parentNode.rowIndex;
-  let x = currentCell.cellIndex;
+function getNeighbors(i, j){
+  let x = i;
+  let y = j;
   let xe = x-1;
   let xw = x+1;
   let yn = y-1;
@@ -40,8 +31,9 @@ function getNeighbors(currentCell){
   return [ne, n, nw, e, w, se, s, sw];
 }
 
-function countLiveNeighbors(neighbors){
+function countLiveNeighbors(i, j){
   let count = 0;
+  let neighbors = getNeighbors(i, j)
   for(let i =0; i < neighbors.length; i++){
     if(neighbors[i].hasClass('clicked')){
       count ++;
@@ -73,28 +65,40 @@ function updateMirrorCells(){
       // let neighbors = getNeighbors($cell);
       let count = countLiveNeighbors(i, j);
       if($cell.hasClass('clicked')){
-        if(count <2 || count > 3){
-          $cell.toggleClass('aboutToDie');
-        }
-        else{
-          if(count === 3){
-            $cell.toggleClass('reBorn');
+        if(count < 2 || count > 3){
+          // $cell.toggleClass('aboutToDie');
+          $cell.addClass('aboutToDie');
+          // $cell.removeClass('clicked');
+          console.log($cell);
+          console.log(count);
+            }
+          } else {
+              if(count === 3){
+              console.log('reborn worked');
+              $cell.addClass('reBorn');
+              console.log($cell);
           }
         }
       }
     }
   }
-}
+
 
 function updateCells(){
-  updateMirrorCells(x, y);
+  updateMirrorCells();
   for(var j = 0; j < y; j++){
     for(var i = 0; i < x; i++){
       let $cell = getCell(i, j);
       if($cell.hasClass('aboutToDie')){
-        $cell.toggleClass('dead');
+        // $cell.toggleClass('dead');
+        $cell.removeClass('aboutToDie');
+        $cell.addClass('dead');
+        console.log($cell);
       } else if($cell.hasClass('reBorn')){
-        $cell.toggleClass('clicked');
+        $cell.addClass('clicked');
+        $cell.removeClass('reBorn');
+        console.log($cell);
+        // $cell.removeClass('reBorn');
       }
     }
 
